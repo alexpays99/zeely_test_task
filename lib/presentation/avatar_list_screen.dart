@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_strings.dart';
-import '../../core/utils/filter_display_helper.dart';
-import '../../domain/entities/age_group.dart';
-import '../../domain/entities/gender.dart';
-import '../../domain/entities/pose.dart';
-import '../controllers/avatar_list_controller.dart';
-import '../widgets/avatar_grid.dart';
-import '../widgets/avatar_list_app_bar.dart';
-import '../widgets/empty_state_view.dart';
-import '../widgets/filter_bar.dart';
-import '../widgets/filter_popup.dart';
+import '../core/constants/app_colors.dart';
+import '../core/constants/app_strings.dart';
+import '../core/utils/filter_display_helper.dart';
+import '../domain/entities/age_group.dart';
+import '../domain/entities/gender.dart';
+import '../domain/entities/pose.dart';
+import 'controllers/avatar_list_controller.dart';
+import 'widgets/avatar_grid.dart';
+import 'widgets/avatar_list_app_bar.dart';
+import 'widgets/empty_state_view.dart';
+import 'widgets/filter_bar.dart';
+import 'widgets/filter_popup.dart';
 
 class AvatarListScreen extends StatefulWidget {
   const AvatarListScreen({super.key});
@@ -34,24 +34,27 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
       backgroundColor: AppColors.surface,
       appBar: const AvatarListAppBar(),
       body: Consumer<AvatarListController>(
-        builder: (context, controller, _) => Column(
-          children: [
-            FilterBar(
-              filter: controller.filter,
-              hasActiveFilters: controller.hasActiveFilters,
-              onClearFilters: controller.clearAllFilters,
-              onGenderTap: () => _showGenderFilter(controller),
-              onAgeTap: () => _showAgeFilter(controller),
-              onPoseTap: () => _showPoseFilter(controller),
+        builder:
+            (context, controller, _) => Column(
+              children: [
+                FilterBar(
+                  filter: controller.filter,
+                  hasActiveFilters: controller.hasActiveFilters,
+                  onClearFilters: controller.clearAllFilters,
+                  onGenderTap: () => _showGenderFilter(controller),
+                  onAgeTap: () => _showAgeFilter(controller),
+                  onPoseTap: () => _showPoseFilter(controller),
+                ),
+                Expanded(
+                  child:
+                      controller.hasResults
+                          ? AvatarGrid(avatars: controller.avatars)
+                          : EmptyStateView(
+                            onClearFilters: controller.clearAllFilters,
+                          ),
+                ),
+              ],
             ),
-            const Divider(height: 1, color: AppColors.divider),
-            Expanded(
-              child: controller.hasResults
-                  ? AvatarGrid(avatars: controller.avatars)
-                  : EmptyStateView(onClearFilters: controller.clearAllFilters),
-            ),
-          ],
-        ),
       ),
     );
   }

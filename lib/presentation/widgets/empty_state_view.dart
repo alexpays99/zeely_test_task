@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_colors.dart';
+import 'package:zeely_test_task/core/constants/app_colors.dart';
+
 import '../../core/constants/app_strings.dart';
+import '../../core/theme/app_text_styles.dart';
 
 class EmptyStateView extends StatelessWidget {
   final VoidCallback onClearFilters;
 
-  const EmptyStateView({
-    super.key,
-    required this.onClearFilters,
-  });
+  const EmptyStateView({super.key, required this.onClearFilters});
 
   @override
   Widget build(BuildContext context) {
@@ -18,31 +17,29 @@ class EmptyStateView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/empty_cup.png',
-              width: 120,
-              height: 120,
-            ),
+            Image.asset('assets/images/empty_cup.png', width: 120, height: 120),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               AppStrings.nothingFound,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.textSecondary,
-              ),
+              style: AppTextStyles.emptyStateTitle,
             ),
             const SizedBox(height: 16),
             GestureDetector(
               onTap: onClearFilters,
-              child: const Text(
-                AppStrings.clearFilters,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.clearFiltersText,
-                  decoration: TextDecoration.underline,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(color: AppColors.borderDefault, width: 1),
+                ),
+                child: Text(
+                  AppStrings.clearFilters,
+                  style: AppTextStyles.emptyStateAction,
                 ),
               ),
             ),

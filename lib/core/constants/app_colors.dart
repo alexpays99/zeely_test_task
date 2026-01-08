@@ -12,6 +12,7 @@ abstract final class AppColors {
   static const Color chipSelectedBackground = Color(0xFF1A1A1A);
   static const Color chipSelectedText = Color(0xFFFFFFFF);
   static const Color chipBorder = Color(0xFFE0E0E0);
+  static const Color borderDefault = Color(0xFFF2F4F6);
   static const Color buttonPrimary = Color(0xFF1A1A1A);
   static const Color buttonText = Color(0xFFFFFFFF);
   static const Color iconColor = Color(0xFF1A1A1A);

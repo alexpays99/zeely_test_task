@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../core/constants/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String label;
@@ -13,25 +15,19 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.buttonPrimary,
-          foregroundColor: AppColors.buttonText,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          elevation: 0,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 25),
+        decoration: BoxDecoration(
+          color: AppColors.buttonPrimary,
+          borderRadius: BorderRadius.circular(100),
         ),
         child: Text(
           label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          textAlign: TextAlign.center,
+          style: AppTextStyles.buttonLabel,
         ),
       ),
     );

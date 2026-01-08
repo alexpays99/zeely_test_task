@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
+import '../../core/theme/app_text_styles.dart';
 import '../controllers/avatar_list_controller.dart';
 import 'filter_option_tile.dart';
 import 'primary_button.dart';
@@ -36,12 +38,10 @@ class FilterPopup<T> extends StatelessWidget {
       value: controller,
       child: Dialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
           child: Consumer<AvatarListController>(
             builder: (context, ctrl, _) {
               final selectedOptions = selectedOptionsSelector(ctrl);
@@ -52,14 +52,7 @@ class FilterPopup<T> extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
+                      Text(title, style: AppTextStyles.titleMedium),
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: const Icon(
@@ -70,7 +63,7 @@ class FilterPopup<T> extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 32),
                   ...options.map(
                     (option) => FilterOptionTile(
                       title: labelBuilder(option),
@@ -79,7 +72,7 @@ class FilterPopup<T> extends StatelessWidget {
                       onTap: () => onToggle(option),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   PrimaryButton(
                     label: saveLabel,
                     onPressed: () {
@@ -87,6 +80,7 @@ class FilterPopup<T> extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
+                  // const SizedBox(height: 32),
                 ],
               );
             },
@@ -114,17 +108,18 @@ class FilterPopup<T> extends StatelessWidget {
       barrierLabel: title,
       barrierColor: AppColors.overlay,
       transitionDuration: AppConstants.animationNormal,
-      pageBuilder: (context, animation, secondaryAnimation) => FilterPopup<T>(
-        title: title,
-        options: options,
-        selectedOptionsSelector: selectedOptionsSelector,
-        labelBuilder: labelBuilder,
-        subtitleBuilder: subtitleBuilder,
-        onToggle: onToggle,
-        onSave: onSave,
-        saveLabel: saveLabel,
-        controller: controller,
-      ),
+      pageBuilder:
+          (context, animation, secondaryAnimation) => FilterPopup<T>(
+            title: title,
+            options: options,
+            selectedOptionsSelector: selectedOptionsSelector,
+            labelBuilder: labelBuilder,
+            subtitleBuilder: subtitleBuilder,
+            onToggle: onToggle,
+            onSave: onSave,
+            saveLabel: saveLabel,
+            controller: controller,
+          ),
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,

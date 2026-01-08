@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../core/constants/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 
 class FilterChipButton extends StatelessWidget {
   final String label;
@@ -20,39 +22,32 @@ class FilterChipButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        height: 36,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.chipSelectedBackground : AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isActive ? AppColors.chipSelectedBackground : AppColors.chipBorder,
-          ),
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppColors.borderDefault),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: isActive ? AppColors.chipSelectedText : AppColors.textPrimary,
-              ),
-            ),
+            Text(label, style: AppTextStyles.filterChipLabel),
             if (activeCount != null && activeCount! > 0) ...[
               const SizedBox(width: 4),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(10),
+                width: 20,
+                height: 20,
+                decoration: const BoxDecoration(
+                  color: AppColors.chipSelectedBackground,
+                  shape: BoxShape.circle,
                 ),
+                alignment: Alignment.center,
                 child: Text(
                   '$activeCount',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                  style: AppTextStyles.filterChipCount.copyWith(
+                    color: AppColors.white,
                   ),
                 ),
               ),
@@ -61,7 +56,7 @@ class FilterChipButton extends StatelessWidget {
             Icon(
               Icons.keyboard_arrow_down,
               size: 18,
-              color: isActive ? AppColors.chipSelectedText : AppColors.textPrimary,
+              color: AppColors.textPrimary,
             ),
           ],
         ),

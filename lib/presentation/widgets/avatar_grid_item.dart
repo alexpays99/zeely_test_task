@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/filter_display_helper.dart';
 import '../../domain/entities/avatar.dart';
 
@@ -26,9 +27,7 @@ class AvatarGridItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   avatar.name[0],
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.titleLarge.copyWith(
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -45,31 +44,11 @@ class AvatarGridItem extends StatelessWidget {
               children: [
                 Text(
                   avatar.name,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 4,
-                        color: AppColors.black,
-                      ),
-                    ],
-                  ),
+                  style: AppTextStyles.avatarName,
                 ),
                 Text(
                   '${FilterDisplayHelper.getGenderShortLabel(avatar.gender)} · ${avatar.age}',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.white,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 4,
-                        color: AppColors.black,
-                      ),
-                    ],
-                  ),
+                  style: AppTextStyles.avatarSubtitle,
                 ),
               ],
             ),
