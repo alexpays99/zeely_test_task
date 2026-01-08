@@ -52,7 +52,7 @@ class FilterChipButton extends StatelessWidget {
                 ),
               ),
             ],
-            const SizedBox(width: 4),
+            const SizedBox(width: 12),
             Icon(
               Icons.keyboard_arrow_down,
               size: 18,
