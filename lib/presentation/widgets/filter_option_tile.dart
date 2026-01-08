@@ -52,7 +52,7 @@ class FilterOptionTile extends StatelessWidget {
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(4),
                 border: Border.all(
                   color: isSelected ? AppColors.radioActive : AppColors.radioInactive,
                   width: 2,

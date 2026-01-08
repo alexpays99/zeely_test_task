@@ -18,9 +18,10 @@ class EmptyStateView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomPaint(
-              size: const Size(120, 120),
-              painter: _EmptyStatePainter(),
+            Image.asset(
+              'assets/images/empty_cup.png',
+              width: 120,
+              height: 120,
             ),
             const SizedBox(height: 24),
             const Text(
@@ -50,37 +51,4 @@ class EmptyStateView extends StatelessWidget {
       ),
     );
   }
-}
-
-class _EmptyStatePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColors.divider
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    final center = Offset(size.width / 2, size.height / 2);
-    
-    canvas.drawRect(
-      Rect.fromCenter(center: center, width: 80, height: 100),
-      paint,
-    );
-
-    final dashPaint = Paint()
-      ..color = AppColors.textSecondary
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    final path = Path();
-    path.moveTo(center.dx - 20, center.dy - 20);
-    path.lineTo(center.dx + 20, center.dy + 20);
-    path.moveTo(center.dx + 20, center.dy - 20);
-    path.lineTo(center.dx - 20, center.dy + 20);
-    
-    canvas.drawPath(path, dashPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

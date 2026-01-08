@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: ChangeNotifierProvider(
-        create: (_) => AvatarListController(
-          AvatarRepositoryImpl(AvatarLocalDatasourceImpl()),
-        ),
+        create:
+            (_) => AvatarListController(
+              AvatarRepositoryImpl(AvatarLocalDatasourceImpl()),
+            ),
         child: const AvatarListScreen(),
       ),
     );

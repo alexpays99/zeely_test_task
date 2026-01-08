@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/utils/filter_display_helper.dart';
 import '../../domain/entities/avatar.dart';
 
 class AvatarGridItem extends StatelessWidget {
@@ -17,49 +18,60 @@ class AvatarGridItem extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Container(
-            color: AppColors.chipBackground,
-            child: Center(
-              child: Text(
-                avatar.name[0],
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textSecondary,
-                ),
-              ),
-            ),
-          ),
-          if (avatar.isPremium)
-            Positioned(
-              top: 8,
-              right: 8,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.buttonPrimary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Text(
-                  'Pro',
-                  style: TextStyle(
-                    fontSize: 12,
+          Image.asset(
+            avatar.imageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => Container(
+              color: AppColors.chipBackground,
+              child: Center(
+                child: Text(
+                  avatar.name[0],
+                  style: const TextStyle(
+                    fontSize: 32,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.buttonText,
+                    color: AppColors.textSecondary,
                   ),
                 ),
               ),
             ),
+          ),
           Positioned(
             left: 8,
+            right: 8,
             bottom: 8,
-            child: Text(
-              avatar.name,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textPrimary,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  avatar.name,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 4,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '${FilterDisplayHelper.getGenderShortLabel(avatar.gender)} · ${avatar.age}',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 4,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

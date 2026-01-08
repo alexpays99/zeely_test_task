@@ -7,6 +7,7 @@ class Avatar {
   final String name;
   final String imageUrl;
   final Gender gender;
+  final int age;
   final AgeGroup ageGroup;
   final Pose pose;
   final bool isPremium;
@@ -16,6 +17,7 @@ class Avatar {
     required this.name,
     required this.imageUrl,
     required this.gender,
+    required this.age,
     required this.ageGroup,
     required this.pose,
     this.isPremium = false,

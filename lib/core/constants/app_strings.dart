@@ -7,15 +7,18 @@ abstract final class AppStrings {
   static const String clearFilters = 'Clear filters';
   static const String nothingFound = 'Nothing was found using these filters';
   
+  static const String male = 'Male';
+  static const String female = 'Female';
+  
   static const String man = 'Man';
   static const String woman = 'Woman';
   
   static const String youngAdults = 'Young adults';
   static const String youngAdultsRange = '18-24';
   static const String adults = 'Adults';
-  static const String adultsRange = '25-35';
+  static const String adultsRange = '25-39';
   static const String middleAgedAdults = 'Middle-aged adults';
-  static const String middleAgedAdultsRange = '40-55';
+  static const String middleAgedAdultsRange = '40-64';
   static const String olderAdults = 'Older adults';
   static const String olderAdultsRange = '65+';
   

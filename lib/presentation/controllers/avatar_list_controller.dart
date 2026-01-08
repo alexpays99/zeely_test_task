@@ -26,6 +26,7 @@ final class AvatarListController extends ChangeNotifier {
   void init() {
     _avatars = _repository.getAvatars();
     _filteredAvatars = _avatars;
+    notifyListeners();
   }
 
   void startEditingFilter() {
