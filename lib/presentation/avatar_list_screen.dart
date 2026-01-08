@@ -7,7 +7,7 @@ import '../core/utils/filter_display_helper.dart';
 import '../domain/entities/age_group.dart';
 import '../domain/entities/gender.dart';
 import '../domain/entities/pose.dart';
-import 'controllers/avatar_list_controller.dart';
+import 'controllers/avatar_list_provider.dart';
 import 'widgets/avatar_grid.dart';
 import 'widgets/avatar_list_app_bar.dart';
 import 'widgets/empty_state_view.dart';
@@ -22,10 +22,12 @@ class AvatarListScreen extends StatefulWidget {
 }
 
 class _AvatarListScreenState extends State<AvatarListScreen> {
+  late final AvatarListProvider _provider;
+
   @override
   void initState() {
     super.initState();
-    _initController();
+    _initProvider();
   }
 
   @override
@@ -33,24 +35,24 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: const AvatarListAppBar(),
-      body: Consumer<AvatarListController>(
+      body: Consumer<AvatarListProvider>(
         builder:
-            (context, controller, _) => Column(
+            (context, provider, _) => Column(
               children: [
                 FilterBar(
-                  filter: controller.filter,
-                  hasActiveFilters: controller.hasActiveFilters,
-                  onClearFilters: controller.clearAllFilters,
-                  onGenderTap: () => _showGenderFilter(controller),
-                  onAgeTap: () => _showAgeFilter(controller),
-                  onPoseTap: () => _showPoseFilter(controller),
+                  filter: provider.filter,
+                  hasActiveFilters: provider.hasActiveFilters,
+                  onClearFilters: provider.clearAllFilters,
+                  onGenderTap: _showGenderFilter,
+                  onAgeTap: _showAgeFilter,
+                  onPoseTap: _showPoseFilter,
                 ),
                 Expanded(
                   child:
-                      controller.hasResults
-                          ? AvatarGrid(avatars: controller.avatars)
+                      provider.hasResults
+                          ? AvatarGrid(avatars: provider.avatars)
                           : EmptyStateView(
-                            onClearFilters: controller.clearAllFilters,
+                            onClearFilters: provider.clearAllFilters,
                           ),
                 ),
               ],
@@ -59,55 +61,55 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
     );
   }
 
-  void _initController() {
+  void _initProvider() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AvatarListController>().init();
+      _provider = context.read<AvatarListProvider>()..init();
     });
   }
 
-  void _showGenderFilter(AvatarListController controller) {
-    controller.startEditingFilter();
-    FilterPopup.show<Gender>(
-      context: context,
-      title: AppStrings.gender,
-      options: Gender.values,
-      selectedOptionsSelector: (c) => c.pendingFilter.genders,
-      labelBuilder: FilterDisplayHelper.getGenderLabel,
-      onToggle: controller.toggleGender,
-      onSave: controller.applyFilter,
-      saveLabel: AppStrings.save,
-      controller: controller,
-    );
-  }
+  void _showGenderFilter() => _showFilter<Gender>(
+    title: AppStrings.gender,
+    options: Gender.values,
+    selectedOptionsSelector: (p) => p.pendingFilter.genders,
+    labelBuilder: FilterDisplayHelper.getGenderLabel,
+    onToggle: _provider.toggleGender,
+  );
 
-  void _showAgeFilter(AvatarListController controller) {
-    controller.startEditingFilter();
-    FilterPopup.show<AgeGroup>(
-      context: context,
-      title: AppStrings.age,
-      options: AgeGroup.values,
-      selectedOptionsSelector: (c) => c.pendingFilter.ageGroups,
-      labelBuilder: FilterDisplayHelper.getAgeGroupLabel,
-      subtitleBuilder: FilterDisplayHelper.getAgeGroupRange,
-      onToggle: controller.toggleAgeGroup,
-      onSave: controller.applyFilter,
-      saveLabel: AppStrings.save,
-      controller: controller,
-    );
-  }
+  void _showAgeFilter() => _showFilter<AgeGroup>(
+    title: AppStrings.age,
+    options: AgeGroup.values,
+    selectedOptionsSelector: (p) => p.pendingFilter.ageGroups,
+    labelBuilder: FilterDisplayHelper.getAgeGroupLabel,
+    subtitleBuilder: FilterDisplayHelper.getAgeGroupRange,
+    onToggle: _provider.toggleAgeGroup,
+  );
 
-  void _showPoseFilter(AvatarListController controller) {
-    controller.startEditingFilter();
-    FilterPopup.show<Pose>(
+  void _showPoseFilter() => _showFilter<Pose>(
+    title: AppStrings.pose,
+    options: Pose.values,
+    selectedOptionsSelector: (p) => p.pendingFilter.poses,
+    labelBuilder: FilterDisplayHelper.getPoseLabel,
+    onToggle: _provider.togglePose,
+  );
+
+  void _showFilter<T>({
+    required String title,
+    required List<T> options,
+    required Set<T> Function(AvatarListProvider) selectedOptionsSelector,
+    required String Function(T) labelBuilder,
+    required void Function(T) onToggle,
+    String? Function(T)? subtitleBuilder,
+  }) {
+    FilterPopup.show<T>(
       context: context,
-      title: AppStrings.pose,
-      options: Pose.values,
-      selectedOptionsSelector: (c) => c.pendingFilter.poses,
-      labelBuilder: FilterDisplayHelper.getPoseLabel,
-      onToggle: controller.togglePose,
-      onSave: controller.applyFilter,
+      title: title,
+      options: options,
+      selectedOptionsSelector: selectedOptionsSelector,
+      labelBuilder: labelBuilder,
+      subtitleBuilder: subtitleBuilder,
+      onToggle: onToggle,
+      onSave: _provider.applyFilter,
       saveLabel: AppStrings.save,
-      controller: controller,
     );
   }
 }

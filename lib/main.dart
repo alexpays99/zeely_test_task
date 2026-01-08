@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'data/datasources/avatar_local_datasource.dart';
 import 'data/repositories/avatar_repository_impl.dart';
-import 'presentation/controllers/avatar_list_controller.dart';
 import 'presentation/avatar_list_screen.dart';
+import 'presentation/controllers/avatar_list_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light,
       home: ChangeNotifierProvider(
         create:
-            (_) => AvatarListController(
+            (_) => AvatarListProvider(
               AvatarRepositoryImpl(AvatarLocalDatasourceImpl()),
             ),
         child: const AvatarListScreen(),

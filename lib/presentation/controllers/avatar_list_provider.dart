@@ -7,7 +7,7 @@ import '../../domain/entities/gender.dart';
 import '../../domain/entities/pose.dart';
 import '../../domain/repositories/avatar_repository.dart';
 
-final class AvatarListController extends ChangeNotifier {
+final class AvatarListProvider extends ChangeNotifier {
   final AvatarRepository _repository;
 
   AvatarFilter _filter = AvatarFilter.empty;
@@ -15,7 +15,7 @@ final class AvatarListController extends ChangeNotifier {
   List<Avatar> _avatars = [];
   List<Avatar> _filteredAvatars = [];
 
-  AvatarListController(this._repository);
+  AvatarListProvider(this._repository);
 
   AvatarFilter get filter => _filter;
   AvatarFilter get pendingFilter => _pendingFilter;
