@@ -7,7 +7,7 @@ import '../core/utils/filter_display_helper.dart';
 import '../domain/entities/age_group.dart';
 import '../domain/entities/gender.dart';
 import '../domain/entities/pose.dart';
-import 'controllers/avatar_list_provider.dart';
+import 'providers/avatar_list_provider.dart';
 import 'widgets/avatar_grid.dart';
 import 'widgets/avatar_list_app_bar.dart';
 import 'widgets/empty_state_view.dart';

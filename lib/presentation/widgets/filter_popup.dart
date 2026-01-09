@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_text_styles.dart';
-import '../controllers/avatar_list_provider.dart';
+import '../providers/avatar_list_provider.dart';
 import 'filter_option_tile.dart';
 import 'primary_button.dart';
 
