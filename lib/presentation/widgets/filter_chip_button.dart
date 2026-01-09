@@ -4,11 +4,6 @@ import '../../core/constants/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 
 class FilterChipButton extends StatelessWidget {
-  final String label;
-  final bool isActive;
-  final int? activeCount;
-  final VoidCallback onTap;
-
   const FilterChipButton({
     super.key,
     required this.label,
@@ -16,6 +11,10 @@ class FilterChipButton extends StatelessWidget {
     required this.onTap,
     this.activeCount,
   });
+  final String label;
+  final bool isActive;
+  final int? activeCount;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

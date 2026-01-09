@@ -5,9 +5,8 @@ import '../../core/constants/app_strings.dart';
 import '../../core/theme/app_text_styles.dart';
 
 class EmptyStateView extends StatelessWidget {
-  final VoidCallback onClearFilters;
-
   const EmptyStateView({super.key, required this.onClearFilters});
+  final VoidCallback onClearFilters;
 
   @override
   Widget build(BuildContext context) {

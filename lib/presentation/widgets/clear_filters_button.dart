@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 
 class ClearFiltersButton extends StatelessWidget {
-  final VoidCallback onTap;
-
   const ClearFiltersButton({super.key, required this.onTap});
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

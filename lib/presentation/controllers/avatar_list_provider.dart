@@ -8,14 +8,14 @@ import '../../domain/entities/pose.dart';
 import '../../domain/repositories/avatar_repository.dart';
 
 final class AvatarListProvider extends ChangeNotifier {
+  AvatarListProvider(this._repository);
+
   final AvatarRepository _repository;
 
   AvatarFilter _filter = AvatarFilter.empty;
   AvatarFilter _pendingFilter = AvatarFilter.empty;
   List<Avatar> _avatars = [];
   List<Avatar> _filteredAvatars = [];
-
-  AvatarListProvider(this._repository);
 
   AvatarFilter get filter => _filter;
   AvatarFilter get pendingFilter => _pendingFilter;

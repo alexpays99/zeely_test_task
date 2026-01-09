@@ -71,7 +71,7 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
     title: AppStrings.gender,
     options: Gender.values,
     selectedOptionsSelector: (p) => p.pendingFilter.genders,
-    labelBuilder: FilterDisplayHelper.getGenderLabel,
+    labelBuilder: (g) => g.label,
     onToggle: _provider.toggleGender,
   );
 
@@ -79,8 +79,8 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
     title: AppStrings.age,
     options: AgeGroup.values,
     selectedOptionsSelector: (p) => p.pendingFilter.ageGroups,
-    labelBuilder: FilterDisplayHelper.getAgeGroupLabel,
-    subtitleBuilder: FilterDisplayHelper.getAgeGroupRange,
+    labelBuilder: (a) => a.label,
+    subtitleBuilder: (a) => a.range,
     onToggle: _provider.toggleAgeGroup,
   );
 
@@ -88,7 +88,7 @@ class _AvatarListScreenState extends State<AvatarListScreen> {
     title: AppStrings.pose,
     options: Pose.values,
     selectedOptionsSelector: (p) => p.pendingFilter.poses,
-    labelBuilder: FilterDisplayHelper.getPoseLabel,
+    labelBuilder: (p) => p.label,
     onToggle: _provider.togglePose,
   );
 

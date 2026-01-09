@@ -6,13 +6,6 @@ import 'clear_filters_button.dart';
 import 'filter_chip_button.dart';
 
 class FilterBar extends StatelessWidget {
-  final AvatarFilter filter;
-  final bool hasActiveFilters;
-  final VoidCallback onClearFilters;
-  final VoidCallback onGenderTap;
-  final VoidCallback onAgeTap;
-  final VoidCallback onPoseTap;
-
   const FilterBar({
     super.key,
     required this.filter,
@@ -22,6 +15,12 @@ class FilterBar extends StatelessWidget {
     required this.onAgeTap,
     required this.onPoseTap,
   });
+  final AvatarFilter filter;
+  final bool hasActiveFilters;
+  final VoidCallback onClearFilters;
+  final VoidCallback onGenderTap;
+  final VoidCallback onAgeTap;
+  final VoidCallback onPoseTap;
 
   @override
   Widget build(BuildContext context) {

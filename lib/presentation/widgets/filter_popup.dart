@@ -9,15 +9,6 @@ import 'filter_option_tile.dart';
 import 'primary_button.dart';
 
 class FilterPopup<T> extends StatelessWidget {
-  final String title;
-  final List<T> options;
-  final Set<T> Function(AvatarListProvider) selectedOptionsSelector;
-  final String Function(T) labelBuilder;
-  final String? Function(T)? subtitleBuilder;
-  final void Function(T) onToggle;
-  final VoidCallback onSave;
-  final String saveLabel;
-
   const FilterPopup({
     super.key,
     required this.title,
@@ -29,6 +20,14 @@ class FilterPopup<T> extends StatelessWidget {
     required this.saveLabel,
     this.subtitleBuilder,
   });
+  final String title;
+  final List<T> options;
+  final Set<T> Function(AvatarListProvider) selectedOptionsSelector;
+  final String Function(T) labelBuilder;
+  final String? Function(T)? subtitleBuilder;
+  final void Function(T) onToggle;
+  final VoidCallback onSave;
+  final String saveLabel;
 
   @override
   Widget build(BuildContext context) {

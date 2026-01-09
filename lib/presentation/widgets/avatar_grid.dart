@@ -4,9 +4,8 @@ import '../../domain/entities/avatar.dart';
 import 'avatar_grid_item.dart';
 
 class AvatarGrid extends StatelessWidget {
-  final List<Avatar> avatars;
-
   const AvatarGrid({super.key, required this.avatars});
+  final List<Avatar> avatars;
 
   @override
   Widget build(BuildContext context) {

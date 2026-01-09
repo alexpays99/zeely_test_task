@@ -3,32 +3,36 @@ import '../../domain/entities/gender.dart';
 import '../../domain/entities/pose.dart';
 import '../constants/app_strings.dart';
 
-abstract final class FilterDisplayHelper {
-  static String getGenderLabel(Gender gender) => switch (gender) {
+extension GenderDisplayExtension on Gender {
+  String get label => switch (this) {
     Gender.man => AppStrings.man,
     Gender.woman => AppStrings.woman,
   };
 
-  static String getGenderShortLabel(Gender gender) => switch (gender) {
+  String get shortLabel => switch (this) {
     Gender.man => AppStrings.male,
     Gender.woman => AppStrings.female,
   };
+}
 
-  static String getAgeGroupLabel(AgeGroup ageGroup) => switch (ageGroup) {
+extension AgeGroupDisplayExtension on AgeGroup {
+  String get label => switch (this) {
     AgeGroup.youngAdults => AppStrings.youngAdults,
     AgeGroup.adults => AppStrings.adults,
     AgeGroup.middleAgedAdults => AppStrings.middleAgedAdults,
     AgeGroup.olderAdults => AppStrings.olderAdults,
   };
 
-  static String getAgeGroupRange(AgeGroup ageGroup) => switch (ageGroup) {
+  String get range => switch (this) {
     AgeGroup.youngAdults => AppStrings.youngAdultsRange,
     AgeGroup.adults => AppStrings.adultsRange,
     AgeGroup.middleAgedAdults => AppStrings.middleAgedAdultsRange,
     AgeGroup.olderAdults => AppStrings.olderAdultsRange,
   };
+}
 
-  static String getPoseLabel(Pose pose) => switch (pose) {
+extension PoseDisplayExtension on Pose {
+  String get label => switch (this) {
     Pose.standing => AppStrings.standing,
     Pose.sitting => AppStrings.sitting,
     Pose.selfie => AppStrings.selfie,

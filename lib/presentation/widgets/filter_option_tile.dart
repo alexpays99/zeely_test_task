@@ -5,11 +5,6 @@ import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_text_styles.dart';
 
 class FilterOptionTile extends StatelessWidget {
-  final String title;
-  final String? subtitle;
-  final bool isSelected;
-  final VoidCallback onTap;
-
   const FilterOptionTile({
     super.key,
     required this.title,
@@ -17,6 +12,10 @@ class FilterOptionTile extends StatelessWidget {
     required this.onTap,
     this.subtitle,
   });
+  final String title;
+  final String? subtitle;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
